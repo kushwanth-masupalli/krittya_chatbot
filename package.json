@@ -1,0 +1,25 @@
+{
+  "name": "krittya_chat_bot",
+  "version": "1.0.0",
+  "description": "chatbot for krittya",
+  "homepage": "https://github.com/kushwanth-masupalli/krittya_chatbot#readme",
+  "bugs": {
+    "url": "https://github.com/kushwanth-masupalli/krittya_chatbot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kushwanth-masupalli/krittya_chatbot.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
