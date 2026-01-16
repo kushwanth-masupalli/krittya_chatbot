@@ -1,10 +1,14 @@
 import time
 from pinecone import Pinecone
 import google.generativeai as genai
+import sys
+from dotenv import load_dotenv
+import os
 
-# ---------------- CONFIG ----------------
-PINECONE_API_KEY = "pcsk_4o9kCn_UCiQQtp9DhCvVJeA2iGXVL7K3QmLgcRjcpfpLiFUy5DS7z1n8QxFdKzt3DQ53RB"
-GEMINI_API_KEY = "AIzaSyDK_H1pYSkVeU1aq6-38UUUAV4XaRVadIU"
+load_dotenv()
+
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 INDEX_NAME = "krittay-vd"
 TOP_K = 3
@@ -73,6 +77,9 @@ Answer:
         "chunks_used": len(chunks),
         "latency": round(time.time() - start_time, 3)
     }
+
+
 if __name__ == "__main__":
-    result = query_rag("what about the billing in krittya")
-    print(result)
+    user_query = sys.argv[1]
+    result = query_rag(user_query)
+    print(result["answer"])
