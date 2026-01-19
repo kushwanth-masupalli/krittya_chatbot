@@ -45,7 +45,9 @@ async function queryRag(query) {
   // 3️⃣ RAG prompt
   const prompt = `
 Answer the question using ONLY the context below.
-If the answer is not present, say "I don't know".
+If the answer is not present, say 
+"sorry i can't answer this question contact kritty team +91 81000 24327 
+ or hello@krittya.com".
 
 Context:
 ${chunks.join('\n')}
