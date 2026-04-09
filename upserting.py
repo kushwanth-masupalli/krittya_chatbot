@@ -1,13 +1,21 @@
+import os
+from dotenv import load_dotenv
 from pinecone import Pinecone
 
-pc = Pinecone(api_key="pcsk_4o9kCn_UCiQQtp9DhCvVJeA2iGXVL7K3QmLgcRjcpfpLiFUy5DS7z1n8QxFdKzt3DQ53RB")
+# Load environment variables
+load_dotenv()
+
+# Initialize Pinecone client
+api_key = os.getenv("PINECONE_API_KEY")
+if not api_key:
+    raise ValueError("PINECONE_API_KEY not found in environment variables")
+
+pc = Pinecone(api_key=api_key)
 
 index_name = "krittay-vd"
-
 index = pc.Index(index_name)
 
-# Because your index is integrated with a hosted embedding model, you provide inputs as text 
-# and Pinecone converts them to dense vectors automatically.
+# Knowledge base data - synchronized with krittya_knowledge_base.txt
 data = [
     {
         "id": "krittya-1",
@@ -67,8 +75,13 @@ data = [
     }
 ]
 
-
-index.upsert_records(
-    namespace="example-namespace",
-    records=data
-)
+try:
+    print(f"Upserting {len(data)} records to index '{index_name}'...")
+    response = index.upsert_records(
+        namespace="example-namespace",
+        records=data
+    )
+    print(f"Successfully upserted records: {response}")
+except Exception as e:
+    print(f"Error upserting records: {e}")
+    raise
